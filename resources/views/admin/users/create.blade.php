@@ -3,7 +3,7 @@
 
 @section('content')
 
-    {!! Form::open(['action'=> 'AdminUsersController@store' , 'method'=> 'post' , 'files'=>true , 'class'=>"create-form" ]) !!}
+    {!! Form::open(['action'=> 'AdminUsersController@store' , 'method'=> 'post' , 'files'=>true , 'class'=>"create-user-form" ]) !!}
 
     <div class="form-group form-inline"> 
           {!! Form::text( 'name' , null , ['class' => 'form-control' , 'placeholder'=>'Users Name']) !!}

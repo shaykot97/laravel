@@ -19,7 +19,7 @@
         </div>
     </div>
 
-    {!! Form::model($user ,['action'=> ['AdminUsersController@update', $user->id] , 'method'=> 'patch' , 'files'=>true , 'class'=>"create-form" ]) !!}
+    {!! Form::model($user ,['action'=> ['AdminUsersController@update', $user->id] , 'method'=> 'patch' , 'files'=>true , 'class'=>"create-user-form" ]) !!}
 
     <div class="form-group form-inline"> 
         {!! Form::text( 'name' , null , ['class' => 'form-control' , 'placeholder'=>'Users Name']) !!}
