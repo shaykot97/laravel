@@ -46,6 +46,10 @@
         display: flex
       }
 
+      .create-roll-form input{
+        margin-bottom:20px;
+      }
+
   </style>
 </head>
 
@@ -97,6 +101,7 @@
                           <h6 class="collapse-header">Custom Utilities:</h6>
                           <a class="collapse-item" href="{{ route('users.index') }}">All Users</a>
                           <a class="collapse-item" href="{{ route('users.create') }}">Create User</a>
+                          <a class="collapse-item" href="{{ route('roles.index') }}">User Roles</a>
                         </div>
                       </div>
                     </li>

@@ -13,14 +13,14 @@
 
     <div class="form-group" style="width:25%;margin:0px 20px;" > 
         {!! Form::label( 'category_id', 'Category' ) !!}
-       {!! Form::select( 'category_id' , array('1'=>'One','2'=>'Two') , 4 ,  ['class' => 'form-control']) !!}
+       {!! Form::select( 'category_id' , ['0'=>'Uncategorized'] + $categories , 0 ,  ['class' => 'form-control']) !!}
 
        {!! Form::label( 'photo_id', 'Photo' ,['style'=>'margin-top:30px;'] ) !!}
        {!! Form::file( 'photo_id') !!}
   </div>
 </div>
 
-  {!! Form::submit('Create User' , ['class'=>'btn btn-primary']) !!}
+  {!! Form::submit('Publish Post' , ['class'=>'btn btn-primary']) !!}
        
 
     {!! Form::close() !!}

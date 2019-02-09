@@ -20,7 +20,7 @@
                     <tr>
                         <td> <img height="50" src="{{ asset($post->photo_id ? $post->photo->src : 'images/default.jpg') }} " alt=""></td>
                         <td> {{ $post->title }} </td>
-                        <td> {{ $post->category_id }}  </td>
+                        <td> {{ $post->category_id == '0' ? 'Uncategorized' : $post->category->name }}  </td>
                         <td> {{ $post->user->name }}  </td>
                         <td> {{ $post->created_at->diffForHumans() }}  </td>
                     </tr>                    
