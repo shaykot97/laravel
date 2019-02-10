@@ -20,7 +20,7 @@
   </div>
 </div>
 
-  {!! Form::submit('Update Post' , ['class'=>'btn btn-primary']) !!}
+  {!! Form::submit('Update Post' , ['class'=>'btn btn-primary']) !!} 
        
 
     {!! Form::close() !!}
