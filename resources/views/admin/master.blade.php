@@ -17,6 +17,7 @@
 
   <!-- Custom styles for this template-->
   <link href="{{asset('adm/css/sb-admin-2.min.css')}}" rel="stylesheet">
+  @yield('styles')
 
   <style>
       .users-table th,td{
@@ -122,6 +123,23 @@
                         </div>
                       </div>
                     </li>
+
+                                 
+<!-- *************************** Nav Item - Media ****************************** -->
+
+<li class="nav-item">
+    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities3" aria-expanded="true" aria-controls="collapseUtilities">
+      <i class="fas fa-fw fa-wrench"></i>
+      <span>Media</span>
+    </a>
+    <div id="collapseUtilities3" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+      <div class="bg-white py-2 collapse-inner rounded">
+        <h6 class="collapse-header">Custom Utilities:</h6>
+        <a class="collapse-item" href="{{ route('media.index') }}">All media</a>
+        <a class="collapse-item" href="{{ route('media.create') }}">Upload</a>
+      </div>
+    </div>
+  </li>
               
                     <!-- Divider -->
                     <hr class="sidebar-divider">
@@ -355,6 +373,7 @@
   <!-- Page level custom scripts -->
   <script src="{{asset('adm/js/demo/chart-area-demo.js')}}"></script>
   <script src="{{asset('adm/js/demo/chart-pie-demo.js')}}"></script>
+  @yield('scripts')
 
 </body>
 

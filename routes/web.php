@@ -33,5 +33,6 @@ Route::group(['middleware'=>'admin'],function(){
     
     Route::resource('admin/posts' , 'AdminPostsController');
     Route::resource('admin/categories' , 'AdminCategoryController');
+    Route::resource('admin/media' , 'AdminPhotoController');
 });
 
