@@ -120,6 +120,7 @@
                           <a class="collapse-item" href="{{ route('posts.index') }}">Al posts</a>
                           <a class="collapse-item" href="{{ route('posts.create') }}">New Post</a>
                           <a class="collapse-item" href="{{ route('categories.index') }}">Ctegories</a>
+                          <a class="collapse-item" href="{{ route('comments.index') }}">Comments</a>
                         </div>
                       </div>
                     </li>

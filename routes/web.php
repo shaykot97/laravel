@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('index');
 })->name('front');
 
 Auth::routes();
@@ -34,5 +34,15 @@ Route::group(['middleware'=>'admin'],function(){
     Route::resource('admin/posts' , 'AdminPostsController');
     Route::resource('admin/categories' , 'AdminCategoryController');
     Route::resource('admin/media' , 'AdminPhotoController');
+    Route::resource('admin/comments' , 'AdminCommentsController');
+    //Route::resource('admin/comments/replies' , 'AdminCommenReplytsController');
 });
 
+
+// Crete blog post routes
+
+Route::get('/blog', function () {
+    return view('blog.index');
+})->name('blog');
+
+Route::resource('blog/post' , 'BlogPostController');

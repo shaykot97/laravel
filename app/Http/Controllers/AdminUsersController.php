@@ -139,12 +139,8 @@ class AdminUsersController extends Controller
             $photo->delete();
        }
 
-
-        $user->post()->delete();
         $user->delete();
 
-        
-       
        session()->flash('user_deleted', 'User has been deleted');
        return redirect('/admin/users');
        
