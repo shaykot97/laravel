@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Post;
+use Illuminate\Support\Facades\Auth;
+use App\Comment;
 
-class BlogPostController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +15,7 @@ class BlogPostController extends Controller
      */
     public function index()
     {
-        return view('blog.index');
+        //
     }
 
     /**
@@ -34,8 +35,21 @@ class BlogPostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    {
-        //
+    {   
+
+        //['post_id', 'is_active', 'author', 'email', 'body']
+
+        $input = $request->all();
+        $user = Auth::user();
+
+        $input['author'] = $user->name;
+        $input['email'] = $user->email;
+        $input['author'] = $user->name;
+        $input['is_active'] = 0;
+
+        Comment::create($input);
+        session()->flash('comment_added' , 'Your comment is succesfully added and waiting for moderation');
+        return redirect()->back();
     }
 
     /**
@@ -45,9 +59,8 @@ class BlogPostController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
-        $post = Post::find($id);
-        return view('blog.single', compact('post'));
+    {
+        //
     }
 
     /**

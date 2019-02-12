@@ -46,3 +46,5 @@ Route::get('/blog', function () {
 })->name('blog');
 
 Route::resource('blog/post' , 'BlogPostController');
+
+Route::resource('post/comment' , 'CommentController');
