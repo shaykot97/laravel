@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\Photo;
+use App\Comment;
 use App\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -71,7 +72,7 @@ class AdminPostsController extends Controller
      */
     public function show($id)
     {
-        //
+       //
     }
 
     /**

@@ -37,14 +37,12 @@ class CommentController extends Controller
     public function store(Request $request)
     {   
 
-        //['post_id', 'is_active', 'author', 'email', 'body']
-
         $input = $request->all();
         $user = Auth::user();
 
         $input['author'] = $user->name;
+        $input['photo'] = $user->photo->src;
         $input['email'] = $user->email;
-        $input['author'] = $user->name;
         $input['is_active'] = 0;
 
         Comment::create($input);

@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Reply;
 use Illuminate\Http\Request;
-use App\Comment;
-use App\Post;
+use Illuminate\Support\Facades\Auth;
 
-class AdminCommentsController extends Controller
+class CommentReplyController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,8 @@ class AdminCommentsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
-        $comments = Comment::all();
-        return view('admin.comments.index', compact('comments'));
+    {
+        return 'It works';
     }
 
     /**
@@ -26,7 +25,7 @@ class AdminCommentsController extends Controller
      */
     public function create()
     {
-        //
+        return 'It works';
     }
 
     /**
@@ -37,7 +36,17 @@ class AdminCommentsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $input = $request->all();
+        $user = Auth::user();
+
+        $input['author'] = $user->name;
+        $input['photo'] = $user->photo->src;
+        $input['email'] = $user->email;
+        $input['is_active'] = 0;
+
+        Reply::create($input);
+        session()->flash('reply_added' , 'Your reply is succesfully added');
+        return redirect()->back();
     }
 
     /**
@@ -48,10 +57,7 @@ class AdminCommentsController extends Controller
      */
     public function show($id)
     {
-        $post = Post::find($id);
-        $comments = $post->comments;
-
-        return view('admin.comments.index', compact('comments'));
+        //
     }
 
     /**
@@ -74,10 +80,7 @@ class AdminCommentsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $comment = Comment::find($id);
-        $comment->update($request->all());
-
-        return redirect()->back();
+        //
     }
 
     /**
@@ -88,9 +91,6 @@ class AdminCommentsController extends Controller
      */
     public function destroy($id)
     {
-        $comment = Comment::find($id);
-        $comment->delete();
-
-        return redirect()->back();
+        //
     }
 }

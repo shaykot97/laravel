@@ -38,6 +38,10 @@ Route::group(['middleware'=>'admin'],function(){
     //Route::resource('admin/comments/replies' , 'AdminCommenReplytsController');
 });
 
+Route::group(['middleware'=>'auth'], function(){
+    Route::resource('/comment/reply', 'CommentReplyController');
+});
+
 
 // Crete blog post routes
 

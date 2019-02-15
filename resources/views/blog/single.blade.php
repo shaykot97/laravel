@@ -33,39 +33,68 @@
       <h3 class="mb-5">6 Comments</h3>
       <ul class="comment-list">
   
+        {{-- start a comment --}}
 
-        <li class="comment">
-          <div class="vcard">
-            <img src="{{asset('/front/images/person_1.jpg')}}" alt="Image placeholder">
-          </div>
-          <div class="comment-body">
-            <h3>Jean Doe</h3>
-            <div class="meta">January 9, 2018 at 2:21pm</div>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-            <p><a href="#" class="reply">Reply</a></p>
-          </div>
+       
 
-                    <ul class="children">
-                      <li class="comment">
-                        <div class="vcard">
-                        <img src="{{asset('/front/images/person_1.jpg')}}" alt="Image placeholder">
+            {{-- end comment --}}
+
+            @if (count($post->comments)> 0)
+                @foreach ($post->comments as $comment)
+                  @if ($comment->is_active)
+
+                    <li class="comment">
+                      <div class="vcard">
+                        <img src="{{asset($comment->photo ? $comment->photo : '/images/default.jpg')}}" alt="Image placeholder">
                       </div>
                       <div class="comment-body">
-                        <h3>Jean Doe</h3>
-                        <div class="meta">January 9, 2018 at 2:21pm</div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur quidem laborum necessitatibus, ipsam impedit vitae autem, eum officia, fugiat saepe enim sapiente iste iure! Quam voluptas earum impedit necessitatibus, nihil?</p>
-                        <p><a href="#" class="reply">Reply</a></p>
+                        <h3> {{ $post->user->name }} </h3>
+                      <div class="meta">{{ $comment->created_at->diffForHumans() }}</div>
+                        <p>{{ $comment->body }}</p>
+
+                        {!! Form::open(['action'=>'CommentReplyController@store', 'method'=>'post','class'=>"post-create-form" ]) !!}
+                          <input name="comment_id" type="hidden" value="{{$comment->id}}">
+                          {!! Form::textarea( 'body' , null , ['class' => 'form-control' , 'placeholder'=>'Post content','style'=>'height: 48px!Important;margin:10px 0px;']) !!}
+                          {!! Form::submit('Reply',['class'=>'reply']) !!}               
+                        {!! Form::close() !!}
+
                       </div>
-                      </li>
-                    </ul>
-            </li>
+
+                          @if (count($comment->replys)>0)
+                              @foreach ($comment->replys as $reply)                            
+                                  <ul class="children">
+                                    <li class="comment">
+                                      <div class="vcard">
+                                      <img src="{{asset($reply->photo ? $reply->photo : '/images/default.jpg')}}" alt="Image placeholder">
+                                    </div>
+                                    <div class="comment-body">
+                                      <h3>{{$reply->author}}</h3>
+                                      <div class="meta">{{$reply->created_at}}</div>
+                                      <p>{{$reply->body}}</p>
+                                    </div>
+                                    </li>
+                                </ul>
+                              @endforeach
+                          @endif
+                    </li>
+
+                    @endif
+                @endforeach
+            @else
+                <h1> This post has no comment </h1>
+            @endif
+
+
+
           </ul>
         </li>
 
   
       </ul>
       <!-- END comment-list -->
-      
+
+      @if (Auth::check())
+           
       <div class="comment-form-wrap">
       
         <h3>Leave a comment</h3>
@@ -90,8 +119,16 @@
       @endif
 
       </div>
+
+        @else
+            <p style="text-align:right"> <a href="#">Log in to make a comment</a> </p>
+        @endif
+
     </div>
 
   </div>
+
+          
+      
     
 @endsection
