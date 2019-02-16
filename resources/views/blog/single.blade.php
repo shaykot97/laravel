@@ -52,7 +52,9 @@
                       <div class="meta">{{ $comment->created_at->diffForHumans() }}</div>
                         <p>{{ $comment->body }}</p>
 
-                        {!! Form::open(['action'=>'CommentReplyController@store', 'method'=>'post','class'=>"post-create-form" ]) !!}
+                        <button class="toggle-reply">Reply Comment</button>
+
+                        {!! Form::open(['action'=>'CommentReplyController@store', 'method'=>'post','class'=>"post-create-form comment-reply" ]) !!}
                           <input name="comment_id" type="hidden" value="{{$comment->id}}">
                           {!! Form::textarea( 'body' , null , ['class' => 'form-control' , 'placeholder'=>'Post content','style'=>'height: 48px!Important;margin:10px 0px;']) !!}
                           {!! Form::submit('Reply',['class'=>'reply']) !!}               
@@ -61,19 +63,21 @@
                       </div>
 
                           @if (count($comment->replys)>0)
-                              @foreach ($comment->replys as $reply)                            
-                                  <ul class="children">
-                                    <li class="comment">
-                                      <div class="vcard">
-                                      <img src="{{asset($reply->photo ? $reply->photo : '/images/default.jpg')}}" alt="Image placeholder">
-                                    </div>
-                                    <div class="comment-body">
-                                      <h3>{{$reply->author}}</h3>
-                                      <div class="meta">{{$reply->created_at}}</div>
-                                      <p>{{$reply->body}}</p>
-                                    </div>
-                                    </li>
-                                </ul>
+                              @foreach ($comment->replys as $reply) 
+                                  @if ($reply->is_active)                  
+                                    <ul class="children">
+                                      <li class="comment">
+                                        <div class="vcard">
+                                        <img src="{{asset($reply->photo ? $reply->photo : '/images/default.jpg')}}" alt="Image placeholder">
+                                      </div>
+                                      <div class="comment-body">
+                                        <h3>{{$reply->author}}</h3>
+                                        <div class="meta">{{$reply->created_at}}</div>
+                                        <p>{{$reply->body}}</p>
+                                      </div>
+                                      </li>
+                                  </ul>
+                                @endif   
                               @endforeach
                           @endif
                     </li>
@@ -117,6 +121,10 @@
       @if (session('comment_added'))
           <p class="alert alert-success"> {{ session('comment_added') }} </p>
       @endif
+
+      @if (session('reply_added'))
+        <p class="alert alert-success"> {{ session('reply_added') }} </p>
+       @endif
 
       </div>
 

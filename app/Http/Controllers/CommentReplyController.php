@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Comment;
 use App\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\CommentReplyRequiest;
 
 class CommentReplyController extends Controller
 {
@@ -34,7 +36,7 @@ class CommentReplyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentReplyRequiest $request)
     {
         $input = $request->all();
         $user = Auth::user();
@@ -45,7 +47,7 @@ class CommentReplyController extends Controller
         $input['is_active'] = 0;
 
         Reply::create($input);
-        session()->flash('reply_added' , 'Your reply is succesfully added');
+        session()->flash('reply_added' , 'Your reply is succesfully added and waiting for moderation');
         return redirect()->back();
     }
 
@@ -57,7 +59,12 @@ class CommentReplyController extends Controller
      */
     public function show($id)
     {
-        //
+        $comment = Comment::find($id);
+        $replys = $comment->replys;
+
+        //return $replys;
+
+        return view('admin.comments.reply', compact('replys'));
     }
 
     /**
@@ -80,7 +87,11 @@ class CommentReplyController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $reply = Reply::find($id);
+
+        $reply->update($request->all());
+        return redirect()->back();
+
     }
 
     /**

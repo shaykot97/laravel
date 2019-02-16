@@ -1,4 +1,4 @@
-</h1>@extends('admin.master')
+@extends('admin.master')
 @section('heading') All Comments @endsection
 
 @section('content')
@@ -11,6 +11,7 @@
             <th scope="col">Post</th>
             <th scope="col">Author</th>
             <th scope="col">Comment</th>
+            <th scope="col">Replies</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
@@ -20,6 +21,7 @@
             <td scope="row"> <a href="{{route('post.show', $comment->post_id)}}" target="_blank"> {{ $comment->post->title }} </a> </td>
                 <td>{{ $comment->author }}</td>
                 <td>{{ $comment->body }}</td>
+                <td> <a href="{{ route('reply.show', $comment->id) }}"> View Replies </a> </td>
                 <td style="display:flex;"> 
                     @if ($comment->is_active == 0)
                         {!! Form::open(['action'=> ['AdminCommentsController@update', $comment] , 'method'=> 'put' , 'files'=>true , 'class'=>"post-create-form", 'style'=>'margin-right:10px;' ]) !!}

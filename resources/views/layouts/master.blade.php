@@ -17,6 +17,14 @@
 
     <!-- Theme Style -->
   <link rel="stylesheet" href="{{asset('/front/css/style.css')}}">
+
+  <style>
+      .comment-reply{
+          display: none;
+      }
+  </style>
+
+  
   </head>
   <body>
     
@@ -335,8 +343,16 @@ Copyright &copy;<script>document.write(new Date().getFullYear());</script> All r
     <script src="{{asset('/front/js/owl.carousel.min.js')}}"></script>
     <script src="{{asset('/front/js/jquery.waypoints.min.js')}}"></script>
     <script src="{{asset('/front/js/jquery.stellar.min.js')}}"></script>
-
-    
     <script src="{{asset('/front/js/main.js')}}"></script>
+
+    <script>
+     
+        $('.toggle-reply').click(function(){
+            $(this).toggle();
+            $(this).next().toggle();
+        })
+  
+    </script>
+    
   </body>
 </html>
